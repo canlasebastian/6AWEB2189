@@ -1,0 +1,252 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cv-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 50px 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfdfd, #f3f3f3); /* brighter gray gradient */
+  color: #222;
+  line-height: 1.8;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Header Styles */
+.cv-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.name {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  color: #0a3d62; /* navy accent */
+  text-transform: uppercase;
+}
+
+.contact-info {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.contact-item strong {
+  font-weight: 600;
+  color: #0a3d62;
+}
+
+.contact-item a {
+  color: #0a3d62;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: #079992; /* teal hover */
+  text-decoration: underline;
+}
+
+.separator {
+  color: #888;
+  margin: 0 6px;
+}
+
+.divider {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #079992, transparent);
+  margin-top: 25px;
+}
+
+/* Content Styles */
+.cv-content {
+  margin-top: 40px;
+}
+
+.profile-section,
+.skills-section,
+.technical-skills {
+  margin-bottom: 55px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0a3d62;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #079992;
+  text-transform: uppercase;
+}
+
+/* Profile Section */
+.profile-text {
+  font-size: 1.05rem;
+  color: #222;
+  text-align: justify;
+  line-height: 1.9;
+  background-color: #f7f7f7;
+  padding: 22px;
+  border-left: 5px solid #0a3d62;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Skills Section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  margin-top: 20px;
+}
+
+.skills-list {
+  list-style-type: disc;
+  padding-left: 24px;
+}
+
+.skills-list li {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.skills-list li:hover {
+  color: #079992;
+  font-weight: 600;
+}
+
+/* Technical Skills Section */
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.tech-category {
+  background: #eaeaea;
+  padding: 20px 24px;
+  border-radius: 8px;
+  border-left: 5px solid #079992;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tech-category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.category-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0a3d62;
+  margin-bottom: 10px;
+}
+
+.tech-items {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 30px 25px;
+  }
+
+  .name {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-container {
+    padding: 20px 15px;
+  }
+
+  .name {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-text,
+  .skills-list li,
+  .tech-items {
+    font-size: 0.9rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .cv-container {
+    padding: 20px;
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+  }
+
+  .name {
+    font-size: 2.3rem;
+    color: #000;
+  }
+
+  .section-title {
+    page-break-after: avoid;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  .profile-section,
+  .skills-section,
+  .technical-skills {
+    page-break-inside: avoid;
+  }
+}
