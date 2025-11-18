@@ -1,0 +1,158 @@
+/* Technical Skills Section */
+.technical-skills {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0a3d62; /* navy accent */
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #079992; /* teal accent line */
+  text-transform: uppercase;
+}
+
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.tech-category {
+  background: #f7f7f7;
+  padding: 20px 24px;
+  border-radius: 8px;
+  border-left: 5px solid #079992; /* teal accent */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tech-category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.category-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0a3d62; /* navy accent */
+  margin-bottom: 10px;
+}
+
+.tech-items {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .tech-category {
+    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .category-title {
+    font-size: 1rem;
+  }
+
+  .tech-items {
+    font-size: 0.9rem;
+  }
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 30px 25px;
+  }
+
+  .name {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-container {
+    padding: 20px 15px;
+  }
+
+  .name {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-text,
+  .skills-list li,
+  .tech-items {
+    font-size: 0.9rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .cv-container {
+    padding: 20px;
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+  }
+
+  .name {
+    font-size: 2.3rem;
+    color: #000;
+  }
+
+  .section-title {
+    page-break-after: avoid;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  .profile-section,
+  .skills-section,
+  .technical-skills {
+    page-break-inside: avoid;
+  }
+}
+}
+

@@ -1,0 +1,169 @@
+/* Profile Section */
+.profile-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0a3d62; /* navy accent */
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #079992; /* teal accent line */
+  text-transform: uppercase;
+}
+
+.profile-text {
+  font-size: 1rem;
+  color: #222;
+  text-align: justify;
+  line-height: 1.9;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-left: 4px solid #0a3d62;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Skills Section */
+.skills-section {
+  margin-bottom: 55px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.skills-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-list {
+  list-style-type: disc;
+  padding-left: 22px;
+}
+
+.skills-list li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.skills-list li:hover {
+  color: #079992; /* teal hover */
+  font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-text,
+  .skills-list li {
+    font-size: 0.9rem;
+  }
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 30px 25px;
+  }
+
+  .name {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-container {
+    padding: 20px 15px;
+  }
+
+  .name {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-text,
+  .skills-list li,
+  .tech-items {
+    font-size: 0.9rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .cv-container {
+    padding: 20px;
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+  }
+
+  .name {
+    font-size: 2.3rem;
+    color: #000;
+  }
+
+  .section-title {
+    page-break-after: avoid;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  .profile-section,
+  .skills-section,
+  .technical-skills {
+    page-break-inside: avoid;
+  }
+}
+}

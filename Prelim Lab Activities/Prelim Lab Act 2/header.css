@@ -1,0 +1,164 @@
+/* Header Styles */
+.cv-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.name {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  color: #0a3d62; /* navy accent */
+  text-transform: uppercase;
+}
+
+.contact-info {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.contact-item strong {
+  font-weight: 600;
+  color: #0a3d62;
+}
+
+.contact-item a {
+  color: #0a3d62;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: #079992; /* teal hover */
+  text-decoration: underline;
+}
+
+.separator {
+  color: #888;
+  margin: 0 6px;
+}
+
+.divider {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #079992, transparent);
+  margin-top: 25px;
+}
+
+/* Responsive Header Adjustments */
+@media (max-width: 768px) {
+  .name {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+  }
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 30px 25px;
+  }
+
+  .name {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-container {
+    padding: 20px 15px;
+  }
+
+  .name {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-text,
+  .skills-list li,
+  .tech-items {
+    font-size: 0.9rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .cv-container {
+    padding: 20px;
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+  }
+
+  .name {
+    font-size: 2.3rem;
+    color: #000;
+  }
+
+  .section-title {
+    page-break-after: avoid;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  .profile-section,
+  .skills-section,
+  .technical-skills {
+    page-break-inside: avoid;
+  }
+}
+}
