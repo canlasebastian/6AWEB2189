@@ -1,0 +1,48 @@
+/* General table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  font-family: Arial, sans-serif;
+}
+
+/* Table headers */
+th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Table cells */
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Zebra striping for rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Table titles */
+h2 {
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+}
+
+/* Optional: make price column stand out */
+td.price {
+  font-weight: bold;
+  color: #e67e22;
+}
