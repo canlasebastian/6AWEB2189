@@ -1,0 +1,123 @@
+/* Modern Blue Theme - Form Edition */
+:root {
+  --primary: #1976d2;
+  --primary-light: #e3f2fd;
+  --border: #b6c6e3;
+  --bg-input: #f9fafd;
+  --text-label: #3a4a5d;
+  --text-main: #1a237e;
+  --error: #d32f2f;
+}
+
+form, .card {
+  max-width: 360px; /* Rounded up for better symmetry */
+  margin: 40px auto;
+  padding: 28px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  box-shadow: 0 10px 25px rgba(25, 118, 210, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Slightly more breathing room */
+  box-sizing: border-box;
+}
+
+/* Input Fields */
+.input-box, .input, select, textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  background: var(--bg-input);
+  color: var(--text-label);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input-box:focus, .input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+/* Radio Group Styling */
+.radio-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.radio-group label {
+  font-size: 14px;
+  color: var(--text-label);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Radio Button Accent */
+.radio-group input[type="radio"] {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Action Button */
+.btn {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: #1565c0;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+}
+
+.btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Feedback & Headers */
+.output {
+  width: 100%;
+  background: var(--primary-light);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+.error {
+  color: var(--error);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: -12px; /* Moves closer to relevant input */
+  align-self: flex-start;
+}
+
+h3 {
+  margin: 0 0 4px 0;
+  color: var(--primary);
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+}

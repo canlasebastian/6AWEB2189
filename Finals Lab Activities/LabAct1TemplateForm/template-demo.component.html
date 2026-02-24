@@ -1,0 +1,86 @@
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <input
+    class="input-box"
+    type="text"
+    name="username"
+    [(ngModel)]="username"
+    placeholder="Enter username"
+    required>
+
+  <input
+    class="input-box"
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="Enter email"
+    required
+    email>
+
+  <input
+    class="input-box"
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    placeholder="Enter password"
+    required
+    minlength="6">
+
+  <select
+    class="input-box"
+    name="role"
+    [(ngModel)]="role"
+    required>
+    <option value="" disabled selected>Select role</option>
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+    <option value="guest">Guest</option>
+  </select>
+
+  <!-- Gender Radio Buttons -->
+  <div class="radio-group">
+    <label>Gender:</label>
+    <label><input type="radio" name="gender" [(ngModel)]="gender" value="male" required> Male</label>
+    <label><input type="radio" name="gender" [(ngModel)]="gender" value="female"> Female</label>
+    <label><input type="radio" name="gender" [(ngModel)]="gender" value="other"> Other</label>
+  </div>
+
+  <!-- Status Radio Buttons -->
+  <div class="radio-group">
+    <label>Status:</label>
+    <label><input type="radio" name="status" [(ngModel)]="status" value="permanent" required> Permanent</label>
+    <label><input type="radio" name="status" [(ngModel)]="status" value="probationary"> Probationary</label>
+  </div>
+
+  <!-- Comments (Notes) -->
+  <textarea
+    class="input-box"
+    name="comments"
+    [(ngModel)]="comments"
+    placeholder="Enter comments or notes here..."
+    rows="3"
+  ></textarea>
+
+  <input
+    class="btn"
+    type="submit"
+    value="Submit"
+    [disabled]="!myForm.valid">
+</form>
+
+<!-- Output Section -->
+<div *ngIf="submitted" class="output">
+  <h3>Form Output</h3>
+  <pre>{{ {
+    username: username,
+    email: email,
+    password: password,
+    role: role,
+    gender: gender,
+    status: status,
+    comments: comments
+  } | json }}</pre>
+</div>
+
+
+
+
