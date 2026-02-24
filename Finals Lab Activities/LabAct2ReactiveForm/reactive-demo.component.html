@@ -1,0 +1,27 @@
+<div class="card">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <input class="input" placeholder="Username" formControlName="username" />
+    @if (isInvalid('username')) {
+      <small class="error">Username: 4-12 chars (letters/numbers/_)</small>
+    }
+
+    <input class="input" type="email" placeholder="Email" formControlName="email" />
+    @if (isInvalid('email')) {
+      <small class="error">Enter a valid email</small>
+    }
+
+    <input class="input" type="password" placeholder="Password" formControlName="password" />
+    @if (isInvalid('password')) {
+      <small class="error">Password: 8+ with upper, lower, number</small>
+    }
+
+    <select class="input" formControlName="role">
+      @for (r of roles; track r) {
+        <option [value]="r">{{ r }}</option>
+      }
+    </select>
+
+    <button class="btn" type="submit" [disabled]="form.invalid">Submit</button>
+  </form>
+</div>
