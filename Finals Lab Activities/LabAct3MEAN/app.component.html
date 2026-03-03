@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Books Application</h1>
+
+  <div class="form">
+    <input id="newBook" placeholder="Title" />
+    <input id="newDesc" placeholder="Description" />
+    <input id="newPrice" placeholder="Book Price" />
+    <input id="newAuthor" placeholder="Author" />
+    <input id="newGenre" placeholder="Genre" />
+    <button (click)="addBook()">Add Book</button>
+  </div>
+
+  <div class="book-list">
+    @for (book of books; track book.id) {
+      <div class="book-card">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.desc }}</p>
+        <span class="price">₱{{ book.price }}</span>
+        <p><b>Author:</b> {{ book.author || 'N/A' }}</p>
+        <p><b>Genre:</b> {{ book.genre || 'N/A' }}</p>
+        <button class="delete" (click)="deleteBook(book.id)">
+          Delete
+        </button>
+      </div>
+    } @empty {
+      <p class="empty">No books available</p>
+    }
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
