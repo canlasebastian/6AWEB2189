@@ -1,0 +1,183 @@
+<div style="display:flex; justify-content:center; padding: 40px; background:#f5f5f5; min-height:100vh;">
+  <mat-card style="width: 500px; padding: 32px; height: fit-content;">
+
+    <mat-card-header style="justify-content:center; margin-bottom: 8px;">
+      <mat-card-title style="font-size:22px; font-weight:bold; text-align:center;">
+        Angular Material / Reactive Form
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-divider style="margin-bottom: 24px;"></mat-divider>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!-- Username -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-icon matSuffix matTooltip="Your display name">person</mat-icon>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Email*</mat-label>
+          <input matInput formControlName="email" type="email" />
+          <mat-icon matSuffix matTooltip="We will never share your email">email</mat-icon>
+          @if (form.get('email')?.hasError('required') && (form.get('email')?.touched || submitted())) {
+            <mat-error>Email is required</mat-error>
+          }
+          @if (form.get('email')?.hasError('email') && (form.get('email')?.touched || submitted())) {
+            <mat-error>Enter a valid email address</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Password*</mat-label>
+          <input matInput formControlName="password" type="password" />
+          <mat-icon matSuffix matTooltip="Minimum 8 characters recommended">lock</mat-icon>
+          @if (form.get('password')?.hasError('required') && (form.get('password')?.touched || submitted())) {
+            <mat-error>Password is required</mat-error>
+          }
+          @if (form.get('password')?.hasError('minlength') && (form.get('password')?.touched || submitted())) {
+            <mat-error>Password must be at least 8 characters</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Gender -->
+        <div style="margin-bottom: 20px;">
+          <p style="font-size:14px; color:#666; margin:0 0 8px 0;">Gender</p>
+          <mat-radio-group formControlName="gender" style="display:flex; gap:24px;">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="other">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Address -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" />
+        </mat-form-field>
+
+        <!-- Birth Date -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Birth Date*</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          @if (submitted() && form.get('birthDate')?.hasError('required')) {
+            <mat-error>Birth date is required</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Slider -->
+        <div style="margin-bottom: 20px;">
+          <p style="font-size:14px; color:#666; margin:0 0 4px 0;">
+            Angular Skill Level: {{ skillLevel() }}
+          </p>
+          <mat-slider min="1" max="10" step="1" style="width:100%;">
+            <input
+              matSliderThumb
+              formControlName="skillLevel"
+              (valueChange)="onSliderChange($event)" />
+          </mat-slider>
+        </div>
+
+        <mat-divider style="margin-bottom: 20px;"></mat-divider>
+
+        <!-- EXTRA #1: Country Select -->
+        <mat-form-field appearance="fill" style="width:100%; margin-bottom:8px;">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            @for (country of countries; track country) {
+              <mat-option [value]="country">{{ country }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- EXTRA #2: Checkbox -->
+        <div style="margin-bottom: 24px;">
+          <mat-checkbox formControlName="agreeTerms">
+            I agree to the Terms &amp; Conditions
+          </mat-checkbox>
+        </div>
+
+        <!-- EXTRA #3: Submit with Tooltip + Icon -->
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          style="width:100%;"
+          matTooltip="Submit your registration">
+          Click Here
+        </button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Submitted Data Display -->
+  @if (submittedData()) {
+    <mat-card style="width: 500px; padding: 32px; margin-top: 24px; height: fit-content;">
+      <mat-card-header style="justify-content:center; margin-bottom: 8px;">
+        <mat-card-title style="font-size:20px; font-weight:bold; text-align:center; color: #4caf50;">
+          <mat-icon style="vertical-align: middle; margin-right: 8px;">check_circle</mat-icon>
+          Form Submitted Successfully!
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-divider style="margin-bottom: 16px;"></mat-divider>
+
+      <mat-card-content>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          @if (submittedData().username) {
+            <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+              <strong>Username</strong>
+              <span>{{ submittedData().username }}</span>
+            </div>
+          }
+          <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+            <strong>Email</strong>
+            <span>{{ submittedData().email }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+            <strong>Password</strong>
+            <span>{{ submittedData().password ? '••••••••' : '' }}</span>
+          </div>
+          @if (submittedData().gender) {
+            <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+              <strong>Gender</strong>
+              <span style="text-transform: capitalize;">{{ submittedData().gender }}</span>
+            </div>
+          }
+          @if (submittedData().address) {
+            <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+              <strong>Address</strong>
+              <span>{{ submittedData().address }}</span>
+            </div>
+          }
+          <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+            <strong>Birth Date</strong>
+            <span>{{ submittedData().birthDate }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+            <strong>Skill Level</strong>
+            <span>{{ submittedData().skillLevel }} / 10</span>
+          </div>
+          @if (submittedData().country) {
+            <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+              <strong>Country</strong>
+              <span>{{ submittedData().country }}</span>
+            </div>
+          }
+          <div style="display:flex; justify-content:space-between; padding:8px 12px; background:#f5f5f5; border-radius:6px;">
+            <strong>Agreed to Terms</strong>
+            <span>{{ submittedData().agreeTerms ? 'Yes' : 'No' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
