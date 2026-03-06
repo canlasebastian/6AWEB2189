@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ── Light Mode (Default) ── */
+body {
+  background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 35%, #e1f5fe 70%, #fce4ec 100%);
+  background-attachment: fixed;
+  color: #1a1a2e;
+  transition: background 0.5s ease, color 0.4s ease;
+}
+
+/* ── Dark Mode ── */
+html.dark-theme body {
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 35%, #16213e 70%, #0f0c29 100%);
+  color: #e0e0e0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 90, 213, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 90, 213, 0.7);
+}

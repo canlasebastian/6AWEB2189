@@ -1,0 +1,413 @@
+<div class="page-wrapper" [class.dark-mode]="isDarkMode()">
+
+  <!-- ═══════ Floating Theme Toggle ═══════ -->
+  <div class="theme-toggle-bar">
+    <mat-icon class="theme-icon">{{ isDarkMode() ? 'dark_mode' : 'light_mode' }}</mat-icon>
+    <mat-slide-toggle [checked]="isDarkMode()" (change)="toggleDarkMode()" color="primary"
+      matTooltip="Toggle dark / light mode">
+    </mat-slide-toggle>
+  </div>
+
+  <!-- ═══════ Header ═══════ -->
+  <div class="form-header">
+    <div class="header-icon-wrap">
+      <mat-icon class="header-icon">event</mat-icon>
+    </div>
+    <h1 class="header-title">Event Registration</h1>
+    <p class="header-subtitle">Join the next big tech experience — register for upcoming events, conferences &
+      workshops.</p>
+  </div>
+
+  <!-- ═══════ Main Form Card ═══════ -->
+  <mat-card class="form-card" appearance="outlined">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <!-- ─── Section: Personal Info ─── -->
+        <div class="section-header">
+          <mat-icon class="section-icon">person</mat-icon>
+          <h2>Personal Information</h2>
+        </div>
+
+        <div class="field-row">
+          <!-- First Name -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="e.g. Juan" />
+            <mat-icon matPrefix>badge</mat-icon>
+            @if (form.get('firstName')?.hasError('required') && (form.get('firstName')?.touched || submitted())) {
+            <mat-error>First name is required</mat-error>
+            }
+            @if (form.get('firstName')?.hasError('minlength') && (form.get('firstName')?.touched || submitted())) {
+            <mat-error>At least 2 characters</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Last Name -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="e.g. Dela Cruz" />
+            <mat-icon matPrefix>person_outline</mat-icon>
+            @if (form.get('lastName')?.hasError('required') && (form.get('lastName')?.touched || submitted())) {
+            <mat-error>Last name is required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="field-full">
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="you@example.com" />
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-hint>We'll send your confirmation here</mat-hint>
+          @if (form.get('email')?.hasError('required') && (form.get('email')?.touched || submitted())) {
+          <mat-error>Email is required</mat-error>
+          }
+          @if (form.get('email')?.hasError('email') && (form.get('email')?.touched || submitted())) {
+          <mat-error>Enter a valid email</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" class="field-full">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="showPassword() ? 'text' : 'password'"
+            placeholder="Create a secure password" />
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+            matTooltip="{{ showPassword() ? 'Hide' : 'Show' }} password">
+            <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.get('password')?.hasError('required') && (form.get('password')?.touched || submitted())) {
+          <mat-error>Password is required</mat-error>
+          }
+          @if (form.get('password')?.hasError('minlength') && (form.get('password')?.touched || submitted())) {
+          <mat-error>Must be at least 8 characters</mat-error>
+          }
+          @if (form.get('password')?.hasError('startsWithLetter') && (form.get('password')?.touched || submitted())) {
+          <mat-error>Must start with a letter</mat-error>
+          }
+          @if (form.get('password')?.hasError('alphanumeric') && (form.get('password')?.touched || submitted())) {
+          <mat-error>Only letters and numbers allowed</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password Strength -->
+        @if (form.get('password')?.value) {
+        <div class="password-strength">
+          <mat-progress-bar mode="determinate" [value]="passwordStrength()" [color]="getPasswordStrengthColor()">
+          </mat-progress-bar>
+          <span class="strength-label" [class]="'strength-' + getPasswordStrengthColor()">
+            {{ getPasswordStrengthLabel() }}
+          </span>
+        </div>
+        <div class="password-rules">
+          <small>
+            <mat-icon class="rule-icon" [class.rule-pass]="form.get('password')?.value?.length >= 8">
+              {{ form.get('password')?.value?.length >= 8 ? 'check_circle' : 'radio_button_unchecked' }}
+            </mat-icon>
+            At least 8 characters
+          </small>
+          <small>
+            <mat-icon class="rule-icon"
+              [class.rule-pass]="form.get('password')?.value && /^[a-zA-Z]/.test(form.get('password')?.value)">
+              {{ form.get('password')?.value && /^[a-zA-Z]/.test(form.get('password')?.value) ? 'check_circle' :
+              'radio_button_unchecked' }}
+            </mat-icon>
+            Starts with a letter
+          </small>
+          <small>
+            <mat-icon class="rule-icon"
+              [class.rule-pass]="form.get('password')?.value && /^[a-zA-Z0-9]+$/.test(form.get('password')?.value)">
+              {{ form.get('password')?.value && /^[a-zA-Z0-9]+$/.test(form.get('password')?.value) ? 'check_circle' :
+              'radio_button_unchecked' }}
+            </mat-icon>
+            Alphanumeric only
+          </small>
+        </div>
+        }
+
+        <div class="field-row">
+          <!-- Birth Date -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate" [max]="maxBirthDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (form.get('birthDate')?.hasError('required') && (form.get('birthDate')?.touched || submitted())) {
+            <mat-error>Birth date is required</mat-error>
+            }
+            @if (form.get('birthDate')?.hasError('tooYoung') && (form.get('birthDate')?.touched || submitted())) {
+            <mat-error>Must be born in 2006 or earlier</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Phone -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Phone (Optional)</mat-label>
+            <input matInput formControlName="phone" placeholder="+63 9XX XXX XXXX" />
+            <mat-icon matPrefix>phone</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Gender -->
+        <div class="radio-section">
+          <p class="radio-label">Gender</p>
+          <mat-radio-group formControlName="gender" class="radio-group">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="non-binary">Non-Binary</mat-radio-button>
+            <mat-radio-button value="prefer-not">Prefer not to say</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <!-- ─── Section: Event Preferences ─── -->
+        <div class="section-header">
+          <mat-icon class="section-icon">celebration</mat-icon>
+          <h2>Event Preferences</h2>
+        </div>
+
+        <div class="field-row">
+          <!-- Event Type -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Event Type</mat-label>
+            <mat-select formControlName="eventType">
+              @for (type of eventTypes; track type) {
+              <mat-option [value]="type">{{ type }}</mat-option>
+              }
+            </mat-select>
+            <mat-icon matPrefix>category</mat-icon>
+            @if (form.get('eventType')?.hasError('required') && (form.get('eventType')?.touched || submitted())) {
+            <mat-error>Please select an event type</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- T-Shirt Size -->
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>T-Shirt Size</mat-label>
+            <mat-select formControlName="tshirtSize">
+              @for (size of tshirtSizes; track size) {
+              <mat-option [value]="size">{{ size }}</mat-option>
+              }
+            </mat-select>
+            <mat-icon matPrefix>checkroom</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Dietary -->
+        <mat-form-field appearance="outline" class="field-full">
+          <mat-label>Dietary Preference</mat-label>
+          <mat-select formControlName="dietary">
+            @for (diet of dietaryOptions; track diet) {
+            <mat-option [value]="diet">{{ diet }}</mat-option>
+            }
+          </mat-select>
+          <mat-icon matPrefix>restaurant</mat-icon>
+        </mat-form-field>
+
+        <!-- Experience Level Slider -->
+        <div class="slider-section">
+          <p class="slider-label">
+            <mat-icon class="inline-icon">trending_up</mat-icon>
+            Experience Level: <strong>{{ getExperienceLabel() }}</strong>
+          </p>
+          <mat-slider min="1" max="5" step="1" discrete class="experience-slider">
+            <input matSliderThumb formControlName="experienceLevel" />
+          </mat-slider>
+          <div class="slider-ticks">
+            <span>Beginner</span>
+            <span>Expert</span>
+          </div>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <!-- ─── Section: Additional ─── -->
+        <div class="section-header">
+          <mat-icon class="section-icon">apartment</mat-icon>
+          <h2>Additional Details</h2>
+        </div>
+
+        <div class="field-row">
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Organization / Company</mat-label>
+            <input matInput formControlName="organization" placeholder="Optional" />
+            <mat-icon matPrefix>business</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="field-half">
+            <mat-label>Job Title / Role</mat-label>
+            <input matInput formControlName="jobTitle" placeholder="Optional" />
+            <mat-icon matPrefix>work</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="field-full">
+          <mat-label>Special Requirements</mat-label>
+          <textarea matInput formControlName="specialRequirements" rows="3"
+            placeholder="Accessibility needs, allergies, or other requests…"></textarea>
+          <mat-icon matPrefix>info</mat-icon>
+        </mat-form-field>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <!-- ─── Agreement & Actions ─── -->
+        <div class="agreements">
+          <mat-checkbox formControlName="agreeTerms" color="primary">
+            I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#"
+              class="terms-link">Privacy Policy</a>
+          </mat-checkbox>
+          @if (form.get('agreeTerms')?.hasError('required') && (form.get('agreeTerms')?.touched || submitted())) {
+          <p class="agreement-error">You must agree to the terms</p>
+          }
+
+          <mat-checkbox formControlName="receiveUpdates" color="primary" style="margin-top:8px;">
+            Send me updates about future events
+          </mat-checkbox>
+        </div>
+
+        <!-- Actions -->
+        <div class="action-row">
+          <button mat-stroked-button type="button" (click)="onReset()" class="btn-reset" matTooltip="Clear all fields">
+            <mat-icon>restart_alt</mat-icon>
+            Reset
+          </button>
+          <button mat-flat-button color="primary" type="submit" class="btn-submit"
+            matTooltip="Submit your registration">
+            <mat-icon>send</mat-icon>
+            Register Now
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- ═══════ Success Card ═══════ -->
+  @if (submittedData()) {
+  <mat-card class="success-card" appearance="outlined">
+    <div class="success-header">
+      <mat-icon class="success-icon">check_circle</mat-icon>
+      <h2>Registration Confirmed!</h2>
+      <p>Here's a summary of your registration details.</p>
+    </div>
+
+    <mat-divider style="margin-bottom:20px;"></mat-divider>
+
+    <mat-card-content>
+      <div class="summary-grid">
+        @if (submittedData().firstName || submittedData().lastName) {
+        <div class="summary-item">
+          <mat-icon>person</mat-icon>
+          <div>
+            <strong>Full Name</strong>
+            <span>{{ submittedData().firstName }} {{ submittedData().lastName }}</span>
+          </div>
+        </div>
+        }
+        <div class="summary-item">
+          <mat-icon>email</mat-icon>
+          <div>
+            <strong>Email</strong>
+            <span>{{ submittedData().email }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <mat-icon>lock</mat-icon>
+          <div>
+            <strong>Password</strong>
+            <span>{{ submittedData().password ? '••••••••' : '—' }}</span>
+          </div>
+        </div>
+        @if (submittedData().birthDate) {
+        <div class="summary-item">
+          <mat-icon>cake</mat-icon>
+          <div>
+            <strong>Date of Birth</strong>
+            <span>{{ submittedData().birthDate | date:'mediumDate' }}</span>
+          </div>
+        </div>
+        }
+        @if (submittedData().gender) {
+        <div class="summary-item">
+          <mat-icon>wc</mat-icon>
+          <div>
+            <strong>Gender</strong>
+            <span>{{ submittedData().gender | titlecase }}</span>
+          </div>
+        </div>
+        }
+        @if (submittedData().phone) {
+        <div class="summary-item">
+          <mat-icon>phone</mat-icon>
+          <div>
+            <strong>Phone</strong>
+            <span>{{ submittedData().phone }}</span>
+          </div>
+        </div>
+        }
+        <div class="summary-item">
+          <mat-icon>category</mat-icon>
+          <div>
+            <strong>Event Type</strong>
+            <span>{{ submittedData().eventType }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <mat-icon>checkroom</mat-icon>
+          <div>
+            <strong>T-Shirt</strong>
+            <span>{{ submittedData().tshirtSize }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <mat-icon>restaurant</mat-icon>
+          <div>
+            <strong>Dietary</strong>
+            <span>{{ submittedData().dietary }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <mat-icon>trending_up</mat-icon>
+          <div>
+            <strong>Experience</strong>
+            <span>{{ getExperienceLabel() }}</span>
+          </div>
+        </div>
+        @if (submittedData().organization) {
+        <div class="summary-item">
+          <mat-icon>business</mat-icon>
+          <div>
+            <strong>Organization</strong>
+            <span>{{ submittedData().organization }}</span>
+          </div>
+        </div>
+        }
+        @if (submittedData().jobTitle) {
+        <div class="summary-item">
+          <mat-icon>work</mat-icon>
+          <div>
+            <strong>Job Title</strong>
+            <span>{{ submittedData().jobTitle }}</span>
+          </div>
+        </div>
+        }
+        <div class="summary-item full-width">
+          <mat-icon>verified</mat-icon>
+          <div>
+            <strong>Agreed to Terms</strong>
+            <span>{{ submittedData().agreeTerms ? 'Yes ✓' : 'No' }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
+
+  <!-- Footer -->
+  <p class="footer-text">
+    Built with <mat-icon class="heart-icon">favorite</mat-icon> Angular Material
+  </p>
+</div>
